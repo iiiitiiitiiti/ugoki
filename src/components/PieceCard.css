@@ -1,0 +1,36 @@
+.m-piece-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.m-piece-card__body {
+  padding: 0 4px;
+}
+
+.m-piece-card__title {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.m-piece-card__link {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .m-piece-card__link:hover {
+    text-decoration-color: var(--color-accent);
+  }
+}
+
+.m-piece-card__summary {
+  margin: 4px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}

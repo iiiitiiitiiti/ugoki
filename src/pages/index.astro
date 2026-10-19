@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import PieceCard from '../components/PieceCard.astro';
+import { categories, pieces } from '../pieces';
+import '../styles/pages/index.css';
+---
+
+<Base>
+  <div class="p-index">
+    <div class="p-index__intro">
+      <h1 class="p-index__title">うごき帳</h1>
+      <p class="p-index__lead">
+        Web 制作でよく使う部品に付ける動きの見本です。枠の中で触って試し、作品名から開いた先でコードをそのままコピーできます。
+      </p>
+    </div>
+    {
+      categories.map((category) => {
+        const items = pieces.filter((p) => p.category === category.id);
+        return (
+          <section class="p-index__section" aria-labelledby={`category-${category.id}`}>
+            <h2 class="p-index__heading" id={`category-${category.id}`}>
+              {category.label}
+            </h2>
+            <div class="p-index__grid">
+              {items.map((piece) => (
+                <PieceCard piece={piece} />
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+</Base>

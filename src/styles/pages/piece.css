@@ -1,0 +1,36 @@
+.p-piece {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.p-piece__back {
+  display: inline-block;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.p-piece__head {
+  margin-bottom: 24px;
+}
+
+.p-piece__category {
+  margin: 0 0 4px;
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.p-piece__title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  line-height: 1.4;
+}
+
+.p-piece__summary {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.p-piece__stage {
+  margin-bottom: 32px;
+}

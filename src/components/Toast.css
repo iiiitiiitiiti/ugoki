@@ -1,0 +1,26 @@
+.m-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 10;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+.m-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.m-toast:empty {
+  padding: 0;
+}

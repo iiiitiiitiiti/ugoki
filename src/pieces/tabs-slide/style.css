@@ -1,0 +1,78 @@
+.m-tabs {
+  /* script.js もこの3つを読んで、中身の入れ替えに同じ速さと緩急を使う */
+  --duration: 360ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --distance: 32px;
+
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-tabs__list {
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid light-dark(#d6d4cc, #3a3942);
+}
+
+.m-tabs__tab {
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  color: light-dark(#5f5d68, #a6a4b0);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color var(--duration) var(--ease);
+}
+
+.m-tabs__tab[aria-selected="true"] {
+  color: light-dark(#4357d1, #95a3ff);
+  font-weight: 700;
+}
+
+/* 幅1pxの線を、選んだタブの位置へ動かして幅の分だけ伸ばす。幅や left を動かすより軽い */
+.m-tabs__indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 1px;
+  height: 2px;
+  background: light-dark(#4357d1, #95a3ff);
+  transform: translateX(var(--x, 0)) scaleX(var(--w, 0));
+  transform-origin: left;
+}
+
+/* 最初の位置合わせでは動かさない */
+.m-tabs.is-ready .m-tabs__indicator {
+  transition: transform var(--duration) var(--ease);
+}
+
+/* 中身はすべて同じ場所に重ね、一番高いものに合わせて高さを固定する（切り替えで下が揺れない） */
+.m-tabs__panels {
+  display: grid;
+  overflow: hidden;
+}
+
+.m-tabs__panel {
+  grid-area: 1 / 1;
+  padding: 16px 4px 4px;
+}
+
+.m-tabs__panel[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
+.m-tabs__price {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.m-tabs__text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+}

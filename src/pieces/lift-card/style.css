@@ -1,0 +1,86 @@
+.m-lift-card {
+  --duration: 400ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --lift: -6px;
+  --zoom: 1.06;
+
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 12px;
+  background: light-dark(#ffffff, #26262e);
+  color: light-dark(#1d1c22, #ecebf2);
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+  transition: transform var(--duration) var(--ease);
+}
+
+/* 大きな影は最初から用意しておき、透明度だけを変える（影そのものを動かすと重い） */
+.m-lift-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 16px 32px rgb(0 0 0 / 0.18);
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease);
+}
+
+.m-lift-card__media {
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  aspect-ratio: 16 / 9;
+}
+
+.m-lift-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration) var(--ease);
+}
+
+.m-lift-card__body {
+  padding: 12px 16px 16px;
+}
+
+.m-lift-card__label {
+  margin: 0 0 2px;
+  color: light-dark(#5f5d68, #a6a4b0);
+  font-size: 12px;
+}
+
+.m-lift-card__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+@media (hover: hover) {
+  .m-lift-card:hover {
+    transform: translateY(var(--lift));
+  }
+
+  .m-lift-card:hover::after {
+    opacity: 1;
+  }
+
+  .m-lift-card:hover .m-lift-card__image {
+    transform: scale(var(--zoom));
+  }
+}
+
+.m-lift-card:focus-visible {
+  transform: translateY(var(--lift));
+}
+
+.m-lift-card:focus-visible::after {
+  opacity: 1;
+}
+
+.m-lift-card:focus-visible .m-lift-card__image {
+  transform: scale(var(--zoom));
+}

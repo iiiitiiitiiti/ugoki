@@ -1,0 +1,83 @@
+.m-expand {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-expand__card,
+.m-expand__detail {
+  overflow: hidden;
+  border-radius: 12px;
+  background: light-dark(#ffffff, #26262e);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+
+.m-expand__card {
+  display: block;
+  width: 160px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.m-expand__detail {
+  display: grid;
+  grid-template-columns: 45% 1fr;
+}
+
+/* display を指定した要素は hidden 属性だけでは消えないため、ここで消す */
+.m-expand__card[hidden],
+.m-expand__detail[hidden] {
+  display: none;
+}
+
+.m-expand__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.m-expand__card .m-expand__title {
+  display: block;
+  padding: 8px 12px 10px;
+}
+
+.m-expand__body {
+  padding: 12px 14px;
+}
+
+.m-expand__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.m-expand__text {
+  margin: 4px 0 8px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.m-expand__close {
+  padding: 4px 12px;
+  border: 1px solid light-dark(#d6d4cc, #3a3942);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* 名前は JS が切り替えの直前に付ける。ここでは動きの長さと緩急だけを決める */
+::view-transition-group(.m-expand) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}

@@ -1,0 +1,44 @@
+.m-underline {
+  --duration: 320ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --line-height: 2px;
+
+  /* 途中で折り返すと下線が1行目にしか付かないので、リンクは1かたまりにする */
+  display: inline-block;
+  position: relative;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* 下線。離れるときは右へ抜けていく */
+.m-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2em;
+  height: var(--line-height);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration) var(--ease);
+}
+
+/* タッチ端末でタップ後に下線が残らないよう、ホバーできる端末だけに付ける */
+@media (hover: hover) {
+  .m-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.m-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.m-underline-text {
+  margin: 0;
+  line-height: 1.8;
+}

@@ -1,0 +1,47 @@
+---
+import '@fontsource-variable/noto-sans-jp';
+import '../styles/global.css';
+import './Base.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Toast from '../components/Toast.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteName = 'うごき帳';
+const {
+  title,
+  description = 'Web 制作でよく使う部品に付ける動きの見本帳。触って試し、HTML・CSS・JS をそのままコピーできます。',
+} = Astro.props;
+const pageTitle = title ? `${title} | ${siteName}` : siteName;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="ja" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <script is:inline src={`${base}/theme.js`}></script>
+  </head>
+  <body>
+    <header class="l-header">
+      <div class="l-header__inner">
+        <a class="l-header__logo" href={`${base}/`}>{siteName}</a>
+        <ThemeToggle />
+      </div>
+    </header>
+    <main class="l-main">
+      <slot />
+    </main>
+    <footer class="l-footer">
+      <p class="l-footer__text">© iiiitiiitiiti</p>
+    </footer>
+    <Toast />
+  </body>
+</html>

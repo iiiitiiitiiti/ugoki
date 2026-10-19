@@ -1,0 +1,40 @@
+.l-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.l-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: calc(var(--content-width) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+}
+
+.l-header__logo {
+  color: var(--color-text);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.l-main {
+  max-width: calc(var(--content-width) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 40px var(--gutter) 80px;
+}
+
+.l-footer {
+  border-top: 1px solid var(--color-border);
+}
+
+.l-footer__text {
+  max-width: calc(var(--content-width) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 16px var(--gutter);
+  color: var(--color-muted);
+  font-size: 13px;
+}

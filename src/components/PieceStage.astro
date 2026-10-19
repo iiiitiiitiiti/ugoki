@@ -1,0 +1,29 @@
+---
+import './PieceStage.css';
+import type { Piece } from '../pieces/types';
+
+interface Props {
+  piece: Piece;
+  size: 'card' | 'detail';
+}
+
+const { piece, size } = Astro.props;
+const isScroll = piece.category === 'scroll';
+---
+
+<div
+  class:list={['m-stage', `m-stage--${size}`, { 'm-stage--scroll': isScroll }]}
+  style={`view-transition-name: stage-${piece.slug}; view-transition-class: stage;`}
+  tabindex={isScroll ? 0 : undefined}
+  role={isScroll ? 'region' : undefined}
+  aria-label={isScroll ? `${piece.title}のデモ（枠の中をスクロール）` : undefined}
+>
+  {isScroll && <p class="m-stage__hint" aria-hidden="true">枠の中をスクロール ↓</p>}
+  <div class="m-stage__body" set:html={piece.markup} />
+  {isScroll && <div class="m-stage__tail" aria-hidden="true"></div>}
+</div>
+
+<script>
+  import './PieceStage.js';
+  import '../scripts/pieces.js';
+</script>

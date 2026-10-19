@@ -1,0 +1,51 @@
+.m-rise {
+  --distance: 24px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  max-width: 320px;
+  margin: 0 auto;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-rise__title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.m-rise__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@keyframes m-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* スクロール連動に対応していないブラウザでは、最初から表示したままにする */
+@supports (animation-timeline: view()) {
+  .m-rise__title,
+  .m-rise__text {
+    animation: m-rise-in var(--ease) both;
+    animation-timeline: view();
+  }
+
+  /* 下から見え始めてから、枠の4分の1ほど上がるあいだに出きる */
+  .m-rise__title {
+    animation-range: cover 0% cover 25%;
+  }
+
+  /* 本文は見出しより少し遅れて始まる */
+  .m-rise__text {
+    animation-range: cover 10% cover 35%;
+  }
+}

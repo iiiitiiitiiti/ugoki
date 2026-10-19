@@ -1,0 +1,76 @@
+.m-code {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-code-bg);
+}
+
+.m-code__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 8px 0;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.m-code__tabs {
+  display: flex;
+}
+
+.m-code__tab {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.m-code__tab[aria-selected='true'] {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.m-code__copy {
+  min-height: 36px;
+  margin-bottom: 6px;
+  padding: 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .m-code__copy:hover {
+    border-color: var(--color-accent);
+  }
+}
+
+.m-code__panel pre {
+  margin: 0;
+  padding: 20px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+/* 色付けはライトが既定。ダークのときは Shiki が用意した暗い配色に差し替える */
+.m-code__panel .astro-code {
+  background-color: transparent !important;
+}
+
+:root[data-theme='dark'] .m-code__panel .astro-code,
+:root[data-theme='dark'] .m-code__panel .astro-code span {
+  color: var(--shiki-dark) !important;
+}

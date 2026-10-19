@@ -1,0 +1,26 @@
+.m-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.m-theme-toggle__icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: inset -5px -3px 0 0 var(--color-bg);
+}
+
+:root[data-theme='dark'] .m-theme-toggle__icon {
+  box-shadow: none;
+}

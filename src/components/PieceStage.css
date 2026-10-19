@@ -1,0 +1,49 @@
+/* デモを置く枠。一覧と詳細で縦横比をそろえ、ページ間の遷移で中身がはみ出さないようにする */
+.m-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: var(--radius);
+  background-color: var(--color-stage);
+  background-image: radial-gradient(var(--color-stage-dot) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.m-stage__body {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.m-stage--detail {
+  padding: 40px;
+}
+
+/* スクロールの作品は、枠そのものをスクロール領域にする。動きは一番近いスクロール領域に連動する */
+/* 上下の余白は外す。残すと、作品の頭が最初から枠の下端の内側に入り、動きが始まらない */
+.m-stage--scroll {
+  display: block;
+  padding-block: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.m-stage__hint {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.m-stage--scroll .m-stage__body {
+  display: block;
+}
+
+.m-stage__tail {
+  height: 60%;
+}

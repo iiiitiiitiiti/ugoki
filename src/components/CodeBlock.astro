@@ -1,0 +1,56 @@
+---
+import { Code } from 'astro:components';
+import './CodeBlock.css';
+import type { Piece } from '../pieces/types';
+
+interface Props {
+  piece: Piece;
+}
+
+const { piece } = Astro.props;
+const files = [
+  { label: 'HTML', lang: 'html' as const, code: piece.markup },
+  { label: 'CSS', lang: 'css' as const, code: piece.style },
+  ...(piece.script ? [{ label: 'JS', lang: 'js' as const, code: piece.script }] : []),
+];
+---
+
+<section class="m-code" aria-label="コード">
+  <div class="m-code__bar">
+    <div class="m-code__tabs" role="tablist" aria-label="ファイル">
+      {
+        files.map((file, i) => (
+          <button
+            class="m-code__tab"
+            type="button"
+            role="tab"
+            id={`code-tab-${file.lang}`}
+            aria-controls={`code-panel-${file.lang}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            {file.label}
+          </button>
+        ))
+      }
+    </div>
+    <button class="m-code__copy" type="button">{files[0].label} をコピー</button>
+  </div>
+  {
+    files.map((file, i) => (
+      <div
+        class="m-code__panel"
+        role="tabpanel"
+        id={`code-panel-${file.lang}`}
+        aria-labelledby={`code-tab-${file.lang}`}
+        hidden={i !== 0}
+      >
+        <Code code={file.code} lang={file.lang} themes={{ light: 'github-light', dark: 'github-dark' }} />
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  import './CodeBlock.js';
+</script>

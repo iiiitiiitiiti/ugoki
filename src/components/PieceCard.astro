@@ -1,0 +1,22 @@
+---
+import './PieceCard.css';
+import PieceStage from './PieceStage.astro';
+import type { Piece } from '../pieces/types';
+
+interface Props {
+  piece: Piece;
+}
+
+const { piece } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<article class="m-piece-card">
+  <PieceStage piece={piece} size="card" />
+  <div class="m-piece-card__body">
+    <h3 class="m-piece-card__title">
+      <a class="m-piece-card__link" href={`${base}/pieces/${piece.slug}/`}>{piece.title}</a>
+    </h3>
+    <p class="m-piece-card__summary">{piece.summary}</p>
+  </div>
+</article>
