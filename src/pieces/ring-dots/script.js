@@ -2,6 +2,12 @@
 // 1枚ごとの見た目を止めたアニメーションに並べておき、スクロールのたびに再生位置を合わせる
 const LENGTH = 1000;
 
+// CSS の時間をミリ秒の数にする。公開用に縮めると 600ms が .6s に書き換わるため、単位を見て換算する
+function toMs(value) {
+  const time = value.trim();
+  return time.endsWith('ms') ? parseFloat(time) : parseFloat(time) * 1000;
+}
+
 function initRingDots(root) {
   const track = root.querySelector('.m-ring-dots__track');
   const dots = [...root.querySelectorAll('.m-ring-dots__dot')];
@@ -63,7 +69,7 @@ function initRingDots(root) {
     const style = getComputedStyle(root);
     // 緩急の計算はブラウザに任せる。対象のないアニメーションを走らせ、その進み具合を読む
     const effect = new KeyframeEffect(null, null, {
-      duration: parseFloat(style.getPropertyValue('--duration')),
+      duration: toMs(style.getPropertyValue('--duration')),
       easing: style.getPropertyValue('--ease').trim(),
       fill: 'forwards',
     });

@@ -4,12 +4,18 @@ const LENGTH = 1000;
 // スクロールがこの時間止まったら、今の1枚の時間を最初から数え直す
 const SETTLE = 150;
 
+// CSS の時間をミリ秒の数にする。公開用に縮めると 600ms が .6s に書き換わるため、単位を見て換算する
+function toMs(value) {
+  const time = value.trim();
+  return time.endsWith('ms') ? parseFloat(time) : parseFloat(time) * 1000;
+}
+
 function initProgressBars(root) {
   const track = root.querySelector('.m-progress-bars__track');
   const bars = [...root.querySelectorAll('.m-progress-bars__bar')];
   const pause = root.querySelector('.m-progress-bars__pause');
   const last = track.children.length - 1;
-  const interval = parseFloat(getComputedStyle(root).getPropertyValue('--interval'));
+  const interval = toMs(getComputedStyle(root).getPropertyValue('--interval'));
   let current = 0;
   let move = null;
   let timer = null;
@@ -95,7 +101,7 @@ function initProgressBars(root) {
     const style = getComputedStyle(root);
     // 緩急の計算はブラウザに任せる。対象のないアニメーションを走らせ、その進み具合を読む
     const effect = new KeyframeEffect(null, null, {
-      duration: parseFloat(style.getPropertyValue('--duration')),
+      duration: toMs(style.getPropertyValue('--duration')),
       easing: style.getPropertyValue('--ease').trim(),
       fill: 'forwards',
     });

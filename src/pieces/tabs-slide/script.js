@@ -1,5 +1,11 @@
 let count = 0;
 
+// CSS の時間をミリ秒の数にする。公開用に縮めると 600ms が .6s に書き換わるため、単位を見て換算する
+function toMs(value) {
+  const time = value.trim();
+  return time.endsWith('ms') ? parseFloat(time) : parseFloat(time) * 1000;
+}
+
 function initTabs(root) {
   const id = count++;
   const list = root.querySelector('.m-tabs__list');
@@ -28,7 +34,7 @@ function initTabs(root) {
     const direction = index > current ? 1 : -1;
     const style = getComputedStyle(root);
     const options = {
-      duration: parseFloat(style.getPropertyValue('--duration')),
+      duration: toMs(style.getPropertyValue('--duration')),
       easing: style.getPropertyValue('--ease').trim(),
     };
     const distance = parseFloat(style.getPropertyValue('--distance'));
