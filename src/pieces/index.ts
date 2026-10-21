@@ -16,6 +16,7 @@ export const categories: { id: Category; label: string }[] = [
   { id: 'toggle', label: '開閉' },
   { id: 'carousel', label: 'カルーセル' },
   { id: 'loop', label: 'ループ' },
+  { id: 'static', label: '動かない部品' },
 ];
 
 export const categoryLabel = (id: Category) => categories.find((c) => c.id === id)?.label ?? id;

@@ -1,0 +1,54 @@
+.m-breadcrumb {
+  width: 100%;
+  color: light-dark(#1d1c22, #ecebf2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.m-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.m-breadcrumb__item {
+  display: flex;
+  align-items: center;
+}
+
+/* 区切りの「＞」は CSS で描く。文字で書くと読み上げで項目ごとに読まれる */
+.m-breadcrumb__item + .m-breadcrumb__item::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-inline: 8px 12px;
+  border-top: 1.5px solid light-dark(#5f5d68, #a6a4b0);
+  border-right: 1.5px solid light-dark(#5f5d68, #a6a4b0);
+  rotate: 45deg;
+}
+
+.m-breadcrumb__link {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+/* 色は時間をかけずに切り替える。この分類の部品は動きを付けない */
+@media (hover: hover) {
+  .m-breadcrumb__link:hover {
+    color: light-dark(#4357d1, #95a3ff);
+  }
+}
+
+.m-breadcrumb__link:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 2px;
+  color: light-dark(#4357d1, #95a3ff);
+}
+
+.m-breadcrumb__current {
+  color: light-dark(#5f5d68, #a6a4b0);
+}

@@ -1,0 +1,34 @@
+/* 英字は飾り。読み上げでは「お知らせ」だけを見出しにするため、HTML 側で aria-hidden を付けている */
+.m-en-heading {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin: 0;
+  color: light-dark(#1d1c22, #ecebf2);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.m-en-heading__en {
+  color: light-dark(#4357d1, #95a3ff);
+  font-size: 44px;
+  letter-spacing: 0.08em;
+  /* 字間は最後の文字の後ろにも付く。中央に置いたとき右へずれないよう、同じだけ左へ戻す */
+  margin-right: -0.08em;
+}
+
+.m-en-heading__ja {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+.m-en-heading__ja::before,
+.m-en-heading__ja::after {
+  content: "";
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+}

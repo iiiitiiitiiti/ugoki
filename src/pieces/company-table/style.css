@@ -1,0 +1,28 @@
+.m-company-table {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: light-dark(#ffffff, #26262e);
+  color: light-dark(#1d1c22, #ecebf2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.m-company-table__head,
+.m-company-table__data {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.m-company-table__head {
+  width: 6em;
+  border-bottom: 1px solid light-dark(#4357d1, #95a3ff);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.m-company-table__data {
+  border-bottom: 1px solid light-dark(#d6d4cc, #3a3942);
+}

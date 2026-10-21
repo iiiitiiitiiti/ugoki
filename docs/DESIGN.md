@@ -66,6 +66,15 @@ Astro の静的サイトを GitHub Pages（`/ugoki/`）で公開する。1作 = 
 - カーソルを乗せている間と止めるボタン（`aria-pressed`・root の `.is-paused`）を押した間は `animation-play-state: paused` で止める。5秒を超えて動き続けるので、指の端末でも止められるようボタンを置く
 - 帯の幅で親が広がらないよう root に `min-width: 0` を付ける。両端は `mask-image` で薄くする
 
+### 動かない部品
+
+Web 制作でよく使う、動きを付けない部品。動きの作と同じ書き方で置き、そのままコピーして使えるようにする。分類を足した理由は [007](decisions/007_static-parts-category.md)。
+
+- 動きは付けない。`transition` と `animation` を書かず、`--duration` と `--ease` も置かない。上の「動かすのは…だけ」の決まりは、この分類には当てはまらない
+- リンクのホバーは色と下線だけを切り替え、時間をかけずに変える。`@media (hover: hover)` の中に書き、同じ見た目を `:focus-visible` にも付ける
+- 読み上げで余計な語を読ませない。英字の飾りは `aria-hidden` にし、パンくずの区切りは CSS で描く。今いるページには `aria-current="page"` を付ける
+- 幅で並びを変える作は、コンテナクエリ（`container-type: inline-size`）で切り替える。一覧の小さな枠と詳細ページの広い枠で、それぞれの並びになる
+
 ## サイト自体の動き
 
 - 一覧 → 詳細は、ページをまたぐ View Transitions（`@view-transition { navigation: auto; }`）で、カードの枠が詳細の枠へ広がる
