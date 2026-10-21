@@ -1,0 +1,78 @@
+.m-stat-roll {
+  /* script.js もこの3つを読む。--duration は左端の桁が止まるまで、--stagger は右へ1桁進むごとに延びる時間 */
+  --duration: 1200ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --stagger: 150ms;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-stat-roll__item {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 16px 4px;
+  border-radius: 12px;
+  background: light-dark(#ffffff, #26262e);
+  box-shadow: inset 0 0 0 1px light-dark(#d6d4cc, #3a3942);
+}
+
+.m-stat-roll__label {
+  color: light-dark(#5f5d68, #a6a4b0);
+  font-size: 12px;
+}
+
+.m-stat-roll__figure {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.m-stat-roll__value {
+  display: inline-flex;
+  color: light-dark(#4357d1, #95a3ff);
+  font-size: 26px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.m-stat-roll__unit {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 1桁ぶんの窓。中の帯（0〜9 を2周）を縦に動かして、窓に見える数字を替える */
+.m-stat-roll__digit {
+  overflow: hidden;
+  height: 1.2em;
+}
+
+.m-stat-roll__reel {
+  display: block;
+}
+
+.m-stat-roll__reel > span {
+  display: block;
+  height: 1.2em;
+  text-align: center;
+}
+
+/* 読み上げには元の数字を1回だけ渡す */
+.m-stat-roll__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
