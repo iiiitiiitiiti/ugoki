@@ -21,7 +21,10 @@ export const categories: { id: Category; label: string; group: Group }[] = [
   { id: 'toggle', label: '開閉', group: 'motion' },
   { id: 'carousel', label: 'カルーセル', group: 'motion' },
   { id: 'loop', label: 'ループ', group: 'motion' },
-  { id: 'static', label: '動かない部品', group: 'static' },
+  { id: 'heading', label: '見出し', group: 'static' },
+  { id: 'news', label: 'お知らせ', group: 'static' },
+  { id: 'table', label: '表', group: 'static' },
+  { id: 'navigation', label: 'ナビゲーション', group: 'static' },
 ];
 
 export const categoryLabel = (id: Category) => categories.find((c) => c.id === id)?.label ?? id;
