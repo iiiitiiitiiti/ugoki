@@ -1,0 +1,100 @@
+.m-logo-loop {
+  /* --duration は1周（ロゴ6つ分）にかける時間 */
+  --duration: 24s;
+  --ease: linear;
+  --gap: 40px;
+
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 560px;
+  /* 流れる帯の幅で親が広がらないようにする */
+  min-width: 0;
+  margin: 0 auto;
+  color: light-dark(#5f5d68, #a6a4b0);
+}
+
+/* 両端を薄くして、ロゴが端から湧いて端へ消えるように見せる */
+.m-logo-loop__viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* 同じ並びを2つ続け、ちょうど1つ分（半分）動いたら最初に戻す。戻った瞬間の見た目は同じなので切れ目が出ない */
+.m-logo-loop__track {
+  display: flex;
+  width: max-content;
+  animation: m-logo-loop-flow var(--duration) var(--ease) infinite;
+}
+
+.m-logo-loop.is-paused .m-logo-loop__track {
+  animation-play-state: paused;
+}
+
+@media (hover: hover) {
+  .m-logo-loop__viewport:hover .m-logo-loop__track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes m-logo-loop-flow {
+  to {
+    translate: -50% 0;
+  }
+}
+
+/* 並びの後ろにも間隔を付け、2つ目の並びとのつなぎ目をロゴどうしの間隔と同じにする */
+.m-logo-loop__list {
+  display: flex;
+  gap: var(--gap);
+  margin: 0;
+  padding: 16px var(--gap) 16px 0;
+  list-style: none;
+}
+
+.m-logo-loop__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.m-logo-loop__mark {
+  fill: currentColor;
+}
+
+.m-logo-loop__pause {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: light-dark(#5f5d68, #a6a4b0);
+  cursor: pointer;
+}
+
+.m-logo-loop__pause::before {
+  content: "";
+  box-sizing: border-box;
+  width: 8px;
+  height: 10px;
+  border-inline: 3px solid currentColor;
+}
+
+.m-logo-loop__pause[aria-pressed="true"]::before {
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.m-logo-loop__pause:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
+}
