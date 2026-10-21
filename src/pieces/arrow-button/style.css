@@ -1,0 +1,68 @@
+.m-arrow-button {
+  --duration: 360ms;
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  /* 先の矢印が抜け始めてから、次の矢印が入り始めるまでの時間 */
+  --gap: 120ms;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px 12px 24px;
+  border-radius: 999px;
+  background: light-dark(#4357d1, #95a3ff);
+  color: light-dark(#ffffff, #1d1c22);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.m-arrow-button:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 3px;
+}
+
+/* 2本の矢印を同じ場所に重ね、はみ出た分を隠す */
+.m-arrow-button__icon {
+  display: grid;
+  overflow: hidden;
+}
+
+.m-arrow-button__arrow {
+  grid-area: 1 / 1;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 離したときは、入ってきた矢印が先に左へ戻り、少し遅れて元の矢印が右から戻る */
+.m-arrow-button__arrow:first-child {
+  transition: translate var(--duration) var(--ease) var(--gap);
+}
+
+.m-arrow-button__arrow:last-child {
+  translate: -100% 0;
+  transition: translate var(--duration) var(--ease);
+}
+
+@media (hover: hover) {
+  .m-arrow-button:hover .m-arrow-button__arrow:first-child {
+    translate: 100% 0;
+    transition-delay: 0s;
+  }
+
+  .m-arrow-button:hover .m-arrow-button__arrow:last-child {
+    translate: 0 0;
+    transition-delay: var(--gap);
+  }
+}
+
+.m-arrow-button:focus-visible .m-arrow-button__arrow:first-child {
+  translate: 100% 0;
+  transition-delay: 0s;
+}
+
+.m-arrow-button:focus-visible .m-arrow-button__arrow:last-child {
+  translate: 0 0;
+  transition-delay: var(--gap);
+}
