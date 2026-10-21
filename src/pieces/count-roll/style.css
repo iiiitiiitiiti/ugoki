@@ -1,7 +1,8 @@
 .m-count-roll {
-  /* script.js もこの2つを読んで、矢印を押したときの送りに同じ速さと緩急を使う */
+  /* script.js もこの3つを読む。--duration と --ease はスライドを送る動き、--interval は1枚を見せる時間 */
   --duration: 500ms;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --interval: 4000ms;
 
   width: 100%;
   max-width: 320px;
@@ -71,6 +72,7 @@
 }
 
 .m-count-roll__controls {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,4 +149,41 @@
 
 .m-count-roll__total {
   color: light-dark(#5f5d68, #a6a4b0);
+}
+
+/* 止めるボタンは右端に重ね、点の並びの中央をずらさない */
+.m-count-roll__pause {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-block: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: light-dark(#5f5d68, #a6a4b0);
+  cursor: pointer;
+}
+
+.m-count-roll__pause::before {
+  content: "";
+  box-sizing: border-box;
+  width: 8px;
+  height: 10px;
+  border-inline: 3px solid currentColor;
+}
+
+.m-count-roll__pause[aria-pressed="true"]::before {
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.m-count-roll__pause:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
 }

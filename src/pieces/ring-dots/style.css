@@ -1,7 +1,8 @@
 .m-ring-dots {
-  /* script.js もこの2つを読んで、点を押したときの送りに同じ速さと緩急を使う */
+  /* script.js もこの3つを読む。--duration と --ease はスライドを送る動き、--interval は1枚を見せる時間 */
   --duration: 600ms;
   --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --interval: 4000ms;
 
   width: 100%;
   max-width: 320px;
@@ -70,11 +71,16 @@
   line-height: 1.4;
 }
 
+.m-ring-dots__controls {
+  position: relative;
+  margin-top: 12px;
+}
+
 .m-ring-dots__dots {
   position: relative;
   display: flex;
   width: max-content;
-  margin: 12px auto 0;
+  margin: 0 auto;
 }
 
 /* 見える点は8px、押せる範囲は24px */
@@ -124,4 +130,41 @@
   border: 1.5px solid light-dark(#4357d1, #95a3ff);
   border-radius: 50%;
   pointer-events: none;
+}
+
+/* 止めるボタンは右端に重ね、点の並びの中央をずらさない */
+.m-ring-dots__pause {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-block: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: light-dark(#5f5d68, #a6a4b0);
+  cursor: pointer;
+}
+
+.m-ring-dots__pause::before {
+  content: "";
+  box-sizing: border-box;
+  width: 8px;
+  height: 10px;
+  border-inline: 3px solid currentColor;
+}
+
+.m-ring-dots__pause[aria-pressed="true"]::before {
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.m-ring-dots__pause:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
 }
