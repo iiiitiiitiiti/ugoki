@@ -1,0 +1,120 @@
+.m-fade-dots {
+  /* 点の色と囲みの出入りの速さと緩急。script.js も読んで、点を押したときの送りに使う */
+  --duration: 600ms;
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-fade-dots__track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 12px;
+}
+
+.m-fade-dots__track::-webkit-scrollbar {
+  display: none;
+}
+
+.m-fade-dots__track:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 2px;
+}
+
+/* 点を押して送る間だけ、1枚ずつ止まる働きを外す（途中の位置を通れるように） */
+.m-fade-dots.is-moving .m-fade-dots__track {
+  scroll-snap-type: none;
+}
+
+.m-fade-dots__slide {
+  flex: 0 0 100%;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  box-sizing: border-box;
+  height: 140px;
+  padding: 20px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: light-dark(#e3e7fb, #272c4d);
+}
+
+.m-fade-dots__slide:nth-child(2) {
+  background: light-dark(#fbe4d8, #48291f);
+}
+
+.m-fade-dots__slide:nth-child(3) {
+  background: light-dark(#dcefe2, #1f3d2b);
+}
+
+.m-fade-dots__slide:nth-child(4) {
+  background: light-dark(#f5edcc, #403a1a);
+}
+
+.m-fade-dots__label {
+  margin: 0;
+  color: light-dark(#5f5d68, #a6a4b0);
+  font-size: 12px;
+}
+
+.m-fade-dots__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.m-fade-dots__dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+/* 見える点は8px、押せる範囲は24px */
+.m-fade-dots__dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.m-fade-dots__dot::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: light-dark(#c2c0b8, #55545e);
+}
+
+/* 色の付いた点と囲みの線を1つにまとめて重ね、透明度だけを変える */
+.m-fade-dots__dot::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  box-sizing: border-box;
+  padding: 3.5px;
+  border: 1.5px solid light-dark(#4357d1, #95a3ff);
+  border-radius: 50%;
+  background: light-dark(#4357d1, #95a3ff) content-box;
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease);
+}
+
+.m-fade-dots__dot[aria-current="true"]::after {
+  opacity: 1;
+}
+
+.m-fade-dots__dot:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
+}
