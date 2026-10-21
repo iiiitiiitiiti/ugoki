@@ -32,6 +32,15 @@ Astro の静的サイトを GitHub Pages（`/ugoki/`）で公開する。1作 = 
 - 名前は作のインスタンスごとに連番を付ける（`m-expand-0` など）
 - `display` を指定した要素は `hidden` 属性だけでは消えないので、`[hidden] { display: none; }` を作の CSS に書く
 
+### 開閉の作
+
+押すたびに開いて閉じる部品。題材を選んだ理由は [003](decisions/003_toggle-menu-button.md)。
+
+- 開閉の状態はボタンの `aria-expanded` で持つ。JS は属性と root の `.is-open` を切り替えるだけで、動きは CSS の `transition` で書く
+- 中身の高さは動かさない。開く中身はページの上に重ね、`clip-path: inset()` で見せる
+- 2段の動き（線が集まってから回る）は、`translate` と `rotate` を別のプロパティに分け、`transition-delay` で順番を付ける。`transition` は行き先の状態の値を使うので、閉じるときの逆の順番は閉じた状態の側に書く
+- 閉じた中身は `inert` にし、見えないリンクへキーボードで移れないようにする。Esc で閉じたらボタンへフォーカスを戻す
+
 ### カルーセルの作
 
 インジケーターの見た目は、スライドの横スクロールの量で決める。指で引けば引いた分だけ動き、点やボタンで送るときは `--duration` と `--ease` で動く。方式を選んだ理由は [002](decisions/002_carousel-scroll-linked-indicator.md)。

@@ -1,0 +1,173 @@
+.m-menu {
+  --duration: 400ms;
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  /* メニューの項目が1つずつ遅れて入る間隔 */
+  --stagger: 60ms;
+
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 176px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid light-dark(#d6d4cc, #3a3942);
+  border-radius: 12px;
+  background: light-dark(#ffffff, #26262e);
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-menu__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 6px 0 16px;
+  border-bottom: 1px solid light-dark(#d6d4cc, #3a3942);
+}
+
+.m-menu__logo {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.m-menu__button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.m-menu__button:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
+}
+
+/* 3本線。閉じるときは×が水平に戻ってから上下へ開く */
+.m-menu__line {
+  position: absolute;
+  top: 19px;
+  left: 10px;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition:
+    translate calc(var(--duration) / 2) var(--ease) calc(var(--duration) / 2),
+    rotate calc(var(--duration) / 2) var(--ease),
+    opacity calc(var(--duration) / 2) var(--ease);
+}
+
+.m-menu__line:nth-child(1) {
+  translate: 0 -6px;
+}
+
+.m-menu__line:nth-child(3) {
+  translate: 0 6px;
+}
+
+/* 開くときは逆に、中央へ集まってから回る */
+.m-menu__button[aria-expanded="true"] .m-menu__line {
+  translate: 0 0;
+  transition:
+    translate calc(var(--duration) / 2) var(--ease),
+    rotate calc(var(--duration) / 2) var(--ease) calc(var(--duration) / 2),
+    opacity calc(var(--duration) / 2) var(--ease) calc(var(--duration) / 2);
+}
+
+.m-menu__button[aria-expanded="true"] .m-menu__line:nth-child(1) {
+  rotate: 45deg;
+}
+
+.m-menu__button[aria-expanded="true"] .m-menu__line:nth-child(2) {
+  opacity: 0;
+}
+
+.m-menu__button[aria-expanded="true"] .m-menu__line:nth-child(3) {
+  rotate: -45deg;
+}
+
+/* メニューはページの上に重ね、閉じている間は下端を上端まで切り詰めて隠す */
+.m-menu__panel {
+  position: absolute;
+  inset: 45px 0 0;
+  background: inherit;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--duration) var(--ease);
+}
+
+.m-menu.is-open .m-menu__panel {
+  clip-path: inset(0);
+}
+
+.m-menu__list {
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+}
+
+/* 開くときだけ1つずつ遅らせる。閉じるときは幕と一緒にまとめて消す */
+.m-menu__item {
+  opacity: 0;
+  translate: 0 -8px;
+  transition:
+    opacity calc(var(--duration) / 2) var(--ease),
+    translate calc(var(--duration) / 2) var(--ease);
+}
+
+.m-menu.is-open .m-menu__item {
+  opacity: 1;
+  translate: 0 0;
+  transition-duration: var(--duration);
+  transition-delay: calc(var(--stagger) * var(--i));
+}
+
+.m-menu__item:nth-child(1) {
+  --i: 1;
+}
+
+.m-menu__item:nth-child(2) {
+  --i: 2;
+}
+
+.m-menu__item:nth-child(3) {
+  --i: 3;
+}
+
+.m-menu__link {
+  display: block;
+  padding: 7px 16px;
+  color: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.m-menu__link:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
+}
+
+.m-menu__page {
+  display: grid;
+  gap: 10px;
+  padding: 20px 16px;
+}
+
+.m-menu__placeholder {
+  height: 10px;
+  border-radius: 5px;
+  background: light-dark(#e9e7e1, #34333c);
+}
+
+.m-menu__placeholder:nth-child(2) {
+  width: 80%;
+}
+
+.m-menu__placeholder:nth-child(3) {
+  width: 60%;
+}

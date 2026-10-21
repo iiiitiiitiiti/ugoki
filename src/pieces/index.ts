@@ -13,6 +13,7 @@ export const categories: { id: Category; label: string }[] = [
   { id: 'hover', label: 'ホバー' },
   { id: 'scroll', label: 'スクロール' },
   { id: 'transition', label: '画面切り替え' },
+  { id: 'toggle', label: '開閉' },
   { id: 'carousel', label: 'カルーセル' },
 ];
 

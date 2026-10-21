@@ -1,6 +1,6 @@
 # うごき帳
 
-Web 制作でよく使う部品（リンク・カード・見出し・タブ・カルーセルなど）に付ける動きの見本帳です。枠の中で触って試し、作品名から開いた先で HTML・CSS・JS をそのままコピーできます。
+Web 制作でよく使う部品（リンク・カード・見出し・タブ・メニュー・カルーセルなど）に付ける動きの見本帳です。枠の中で触って試し、作品名から開いた先で HTML・CSS・JS をそのままコピーできます。
 
 - 公開 URL: https://iiiitiiitiiti.github.io/ugoki/
 - コピーしたコードは、このサイトのほかの CSS・JS に頼らず単体で動きます
@@ -16,6 +16,7 @@ Web 制作でよく使う部品（リンク・カード・見出し・タブ・�
 | スクロール | 幕が開くように出る画像 | 名前付きの `view-timeline` と `clip-path: inset()` |
 | 画面切り替え | 広がって詳細になるカード | `document.startViewTransition` |
 | 画面切り替え | 下線が滑るタブ | 下線の `transform` と、向きに合わせた左右のスライド（Web Animations） |
+| 開閉 | ×に変わるメニューボタン | 線の `translate` と `rotate` を時間差で動かす。メニューは `clip-path: inset()` で上から開く |
 | カルーセル | 囲みが移るドット | 線の丸の `translateX` と、点の色の `opacity` |
 | カルーセル | 囲みが消えて現れるドット | 点の色と囲みをまとめた擬似要素の `opacity`（`transition`） |
 | カルーセル | 伸びるドット | 点の `clip-path: inset()` と、後ろの点の `translateX` |
@@ -51,7 +52,7 @@ npm run dev          # http://localhost:4321/ugoki/
 | `markup.html` | 必須 | デモの HTML。id は使わず class だけにする（一覧と詳細で同じページに並ぶため） |
 | `style.css` | 必須 | その作だけで完結する CSS。class は `m-` で始める |
 | `script.js` | 任意 | JS が要る作だけ。ページ内の該当要素をすべて初期化する |
-| `meta.ts` | 必須 | 作品名・分類（`hover` / `scroll` / `transition` / `carousel`）・説明・分類内の順番 |
+| `meta.ts` | 必須 | 作品名・分類（`hover` / `scroll` / `transition` / `toggle` / `carousel`）・説明・分類内の順番 |
 
 必須ファイルが欠けると build が止まります。詳細ページに出るコードは、デモで動いているファイルそのものです。
 

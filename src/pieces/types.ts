@@ -1,4 +1,4 @@
-export type Category = 'hover' | 'scroll' | 'transition' | 'carousel';
+export type Category = 'hover' | 'scroll' | 'transition' | 'toggle' | 'carousel';
 
 export interface PieceMeta {
   title: string;
