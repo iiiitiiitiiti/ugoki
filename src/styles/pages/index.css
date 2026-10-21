@@ -1,6 +1,6 @@
 .p-index__intro {
   max-width: 720px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .p-index__title {
@@ -15,6 +15,71 @@
   color: var(--color-muted);
 }
 
+.p-index__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.p-index__tab {
+  margin-bottom: -1px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.p-index__tab[aria-selected='true'] {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+@media (hover: hover) {
+  .p-index__tab:hover {
+    color: var(--color-text);
+  }
+}
+
+/* hidden="until-found" に対応しないブラウザでも display: none にせず中身の描画だけ止める。消すとカルーセルの横スクロールの量が 0 になり、戻したときに自動送りが止まる */
+.p-index__panel[hidden] {
+  display: block;
+  content-visibility: hidden;
+}
+
+.p-index__toc-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 48px;
+  padding: 0;
+  list-style: none;
+}
+
+.p-index__toc-link {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .p-index__toc-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+}
+
 .p-index__section + .p-index__section {
   margin-top: 56px;
 }
@@ -22,6 +87,7 @@
 .p-index__heading {
   margin: 0 0 20px;
   font-size: 22px;
+  scroll-margin-top: 24px;
 }
 
 .p-index__grid {
@@ -39,5 +105,12 @@
 @media (min-width: 1024px) {
   .p-index__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 分類へのリンクで、見出しまでなめらかに移る */
+@media (prefers-reduced-motion: no-preference) {
+  :root:has(.p-index__toc) {
+    scroll-behavior: smooth;
   }
 }

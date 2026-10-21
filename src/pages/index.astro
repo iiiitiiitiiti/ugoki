@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PieceCard from '../components/PieceCard.astro';
-import { categories, pieces } from '../pieces';
+import { categories, groups, pieces } from '../pieces';
 import '../styles/pages/index.css';
 ---
 
@@ -10,25 +10,73 @@ import '../styles/pages/index.css';
     <div class="p-index__intro">
       <h1 class="p-index__title">うごき帳</h1>
       <p class="p-index__lead">
-        Web 制作でよく使う部品に付ける動きの見本です。枠の中で触って試し、作品名から開いた先でコードをそのままコピーできます。動きを付けない部品の見本も最後に置いています。
+        Web 制作でよく使う部品に付ける動きの見本です。枠の中で触って試し、作品名から開いた先でコードをそのままコピーできます。動きを付けない部品の見本は「動かないパーツ」にまとめています。
       </p>
     </div>
+    <div class="p-index__tabs" role="tablist" aria-label="部品の種類">
+      {
+        groups.map((group, i) => (
+          <button
+            class="p-index__tab"
+            type="button"
+            role="tab"
+            id={`tab-${group.id}`}
+            aria-controls={`panel-${group.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            data-group={group.id}
+          >
+            {group.label}
+          </button>
+        ))
+      }
+    </div>
     {
-      categories.map((category) => {
-        const items = pieces.filter((p) => p.category === category.id);
+      groups.map((group, i) => {
+        const groupCategories = categories.filter((c) => c.group === group.id);
         return (
-          <section class="p-index__section" aria-labelledby={`category-${category.id}`}>
-            <h2 class="p-index__heading" id={`category-${category.id}`}>
-              {category.label}
-            </h2>
-            <div class="p-index__grid">
-              {items.map((piece) => (
-                <PieceCard piece={piece} />
-              ))}
-            </div>
-          </section>
+          <div
+            class="p-index__panel"
+            role="tabpanel"
+            id={`panel-${group.id}`}
+            aria-labelledby={`tab-${group.id}`}
+            hidden={i === 0 ? undefined : 'until-found'}
+          >
+            {groupCategories.length > 1 && (
+              <nav class="p-index__toc" aria-label="分類へ移動">
+                <ul class="p-index__toc-list">
+                  {groupCategories.map((category) => (
+                    <li>
+                      <a class="p-index__toc-link" href={`#category-${category.id}`}>
+                        {category.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+            {groupCategories.map((category) => {
+              const items = pieces.filter((p) => p.category === category.id);
+              return (
+                <section class="p-index__section" aria-labelledby={`category-${category.id}`}>
+                  <h2 class="p-index__heading" id={`category-${category.id}`}>
+                    {category.label}
+                  </h2>
+                  <div class="p-index__grid">
+                    {items.map((piece) => (
+                      <PieceCard piece={piece} />
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
         );
       })
     }
   </div>
 </Base>
+
+<script>
+  import '../scripts/index-tabs.js';
+</script>

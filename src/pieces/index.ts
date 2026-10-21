@@ -1,5 +1,5 @@
 // 全作品を集める。デモに使うファイルと、詳細ページに見せるコードは同じファイルから読む
-import type { Category, Piece, PieceMeta } from './types';
+import type { Category, Group, Piece, PieceMeta } from './types';
 
 // 一覧・詳細のどちらでも全作品の CSS を読み込む（どれも小さいので分けない）
 import.meta.glob('./*/style.css', { eager: true });
@@ -9,14 +9,19 @@ const markups = import.meta.glob<string>('./*/markup.html', { query: '?raw', imp
 const styles = import.meta.glob<string>('./*/style.css', { query: '?raw', import: 'default', eager: true });
 const scripts = import.meta.glob<string>('./*/script.js', { query: '?raw', import: 'default', eager: true });
 
-export const categories: { id: Category; label: string }[] = [
-  { id: 'hover', label: 'ホバー' },
-  { id: 'scroll', label: 'スクロール' },
-  { id: 'transition', label: '画面切り替え' },
-  { id: 'toggle', label: '開閉' },
-  { id: 'carousel', label: 'カルーセル' },
-  { id: 'loop', label: 'ループ' },
-  { id: 'static', label: '動かない部品' },
+export const groups: { id: Group; label: string }[] = [
+  { id: 'motion', label: '動くパーツ' },
+  { id: 'static', label: '動かないパーツ' },
+];
+
+export const categories: { id: Category; label: string; group: Group }[] = [
+  { id: 'hover', label: 'ホバー', group: 'motion' },
+  { id: 'scroll', label: 'スクロール', group: 'motion' },
+  { id: 'transition', label: '画面切り替え', group: 'motion' },
+  { id: 'toggle', label: '開閉', group: 'motion' },
+  { id: 'carousel', label: 'カルーセル', group: 'motion' },
+  { id: 'loop', label: 'ループ', group: 'motion' },
+  { id: 'static', label: '動かない部品', group: 'static' },
 ];
 
 export const categoryLabel = (id: Category) => categories.find((c) => c.id === id)?.label ?? id;

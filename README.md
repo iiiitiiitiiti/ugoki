@@ -1,6 +1,6 @@
 # うごき帳
 
-Web 制作でよく使う部品（リンク・ボタン・カード・見出し・タブ・メニュー・カルーセル・ロゴの帯・実績の数字・お知らせの小窓など）に付ける動きの見本帳です。枠の中で触って試し、作品名から開いた先で HTML・CSS・JS をそのままコピーできます。動きを付けない部品（英字つきの見出し・お知らせ一覧・会社概要の表・パンくずリスト）の見本も置いています。
+Web 制作でよく使う部品（リンク・ボタン・カード・見出し・タブ・メニュー・カルーセル・ロゴの帯・実績の数字・お知らせの小窓など）に付ける動きの見本帳です。枠の中で触って試し、作品名から開いた先で HTML・CSS・JS をそのままコピーできます。動きを付けない部品（英字つきの見出し・お知らせ一覧・会社概要の表・パンくずリスト）の見本も置いています。一覧はこの2つをタブで切り替え、分類の見出しへはページ先頭のリンクから移れます。
 
 - 公開 URL: https://iiiitiiitiiti.github.io/ugoki/
 - コピーしたコードは、このサイトのほかの CSS・JS に頼らず単体で動きます
@@ -60,7 +60,7 @@ npm run dev          # http://localhost:4321/ugoki/
 | `markup.html` | 必須 | デモの HTML。id は使わず class だけにする（一覧と詳細で同じページに並ぶため） |
 | `style.css` | 必須 | その作だけで完結する CSS。class は `m-` で始める |
 | `script.js` | 任意 | JS が要る作だけ。ページ内の該当要素をすべて初期化する |
-| `meta.ts` | 必須 | 作品名・分類（`hover` / `scroll` / `transition` / `toggle` / `carousel` / `loop`）・説明・分類内の順番 |
+| `meta.ts` | 必須 | 作品名・分類（`hover` / `scroll` / `transition` / `toggle` / `carousel` / `loop` / `static`）・説明・分類内の順番 |
 
 必須ファイルが欠けると build が止まります。詳細ページに出るコードは、デモで動いているファイルそのものです。
 
@@ -68,10 +68,11 @@ npm run dev          # http://localhost:4321/ugoki/
 
 | ファイル | 役割 |
 |---|---|
-| `src/pieces/index.ts` | 全作品のファイルを集め、分類と順番で並べる |
+| `src/pieces/index.ts` | 全作品のファイルを集め、分類と順番で並べる。分類ごとに一覧のどのタブに入れるかも決める |
 | `src/components/PieceStage.*` | デモを置く枠。スクロールの作では枠そのものをスクロール領域にする |
 | `src/components/CodeBlock.*` | HTML・CSS・JS のタブとコピー |
 | `src/scripts/pieces.js` | 全作品の `script.js` を1本にまとめて読み込む |
+| `src/scripts/index-tabs.js` | 一覧の「動くパーツ」「動かないパーツ」のタブ |
 | `public/theme.js` | 描画前にテーマを当て、ダークの再読み込みでライトが一瞬見えるのを防ぐ |
 
 設計の全体は [docs/DESIGN.md](docs/DESIGN.md)、判断の記録は [docs/decisions/](docs/decisions/) にあります。
