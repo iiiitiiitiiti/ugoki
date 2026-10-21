@@ -1,0 +1,122 @@
+.m-soft-dialog {
+  --duration: 320ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 176px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid light-dark(#d6d4cc, #3a3942);
+  border-radius: 12px;
+  background: light-dark(#ffffff, #26262e);
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-soft-dialog__page {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  height: 100%;
+  padding: 20px 16px;
+}
+
+.m-soft-dialog__placeholder {
+  height: 10px;
+  border-radius: 5px;
+  background: light-dark(#e9e7e1, #34333c);
+}
+
+.m-soft-dialog__placeholder:nth-child(2) {
+  width: 80%;
+}
+
+.m-soft-dialog__placeholder:nth-child(3) {
+  width: 60%;
+}
+
+.m-soft-dialog__open,
+.m-soft-dialog__close {
+  justify-self: start;
+  margin-top: 8px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: light-dark(#4357d1, #95a3ff);
+  color: light-dark(#ffffff, #141418);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.m-soft-dialog__open:focus-visible,
+.m-soft-dialog__close:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 2px;
+}
+
+/* 膜と小窓は閉じている間も枠を覆っている。クリックを下のページへ通す */
+.m-soft-dialog__backdrop,
+.m-soft-dialog__window {
+  pointer-events: none;
+  opacity: 0;
+  /* 閉じるときは開くときより短くし、さっと引かせる */
+  transition-duration: calc(var(--duration) * 0.6);
+  transition-timing-function: var(--ease);
+}
+
+.m-soft-dialog__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.45);
+  transition-property: opacity;
+}
+
+.m-soft-dialog__window {
+  position: absolute;
+  inset: 0;
+  width: min(240px, calc(100% - 32px));
+  height: fit-content;
+  margin: auto;
+  padding: 16px;
+  border-radius: 12px;
+  background: light-dark(#ffffff, #26262e);
+  box-shadow:
+    inset 0 0 0 1px light-dark(#d6d4cc, #3a3942),
+    0 12px 32px rgb(0 0 0 / 0.25);
+  scale: 0.92;
+  translate: 0 8px;
+  transition-property: opacity, scale, translate;
+}
+
+/* 開いたときにフォーカスを置くのは小窓そのもの。枠線は中のボタンにだけ出す */
+.m-soft-dialog__window:focus {
+  outline: none;
+}
+
+.m-soft-dialog.is-open .m-soft-dialog__backdrop,
+.m-soft-dialog.is-open .m-soft-dialog__window {
+  pointer-events: auto;
+  opacity: 1;
+  transition-duration: var(--duration);
+}
+
+.m-soft-dialog.is-open .m-soft-dialog__window {
+  scale: 1;
+  translate: 0 0;
+}
+
+.m-soft-dialog__title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.m-soft-dialog__text {
+  margin: 6px 0 0;
+  color: light-dark(#5f5d68, #a6a4b0);
+  font-size: 13px;
+  line-height: 1.6;
+}
