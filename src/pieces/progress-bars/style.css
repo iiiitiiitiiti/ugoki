@@ -1,0 +1,150 @@
+.m-progress-bars {
+  /* script.js もこの3つを読む。--duration と --ease はスライドを送る動き、--interval は1枚を見せる時間 */
+  --duration: 600ms;
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --interval: 4000ms;
+
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-progress-bars__track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 12px;
+}
+
+.m-progress-bars__track::-webkit-scrollbar {
+  display: none;
+}
+
+.m-progress-bars__track:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 2px;
+}
+
+/* ボタンで送る間だけ、1枚ずつ止まる働きを外す（途中の位置を通れるように） */
+.m-progress-bars.is-moving .m-progress-bars__track {
+  scroll-snap-type: none;
+}
+
+.m-progress-bars__slide {
+  flex: 0 0 100%;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  box-sizing: border-box;
+  height: 140px;
+  padding: 20px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: light-dark(#e3e7fb, #272c4d);
+}
+
+.m-progress-bars__slide:nth-child(2) {
+  background: light-dark(#fbe4d8, #48291f);
+}
+
+.m-progress-bars__slide:nth-child(3) {
+  background: light-dark(#dcefe2, #1f3d2b);
+}
+
+.m-progress-bars__slide:nth-child(4) {
+  background: light-dark(#f5edcc, #403a1a);
+}
+
+.m-progress-bars__label {
+  margin: 0;
+  color: light-dark(#5f5d68, #a6a4b0);
+  font-size: 12px;
+}
+
+.m-progress-bars__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.m-progress-bars__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.m-progress-bars__bars {
+  display: flex;
+  flex: 1;
+  gap: 6px;
+}
+
+/* 押せる範囲は高さ24px。見える線は3px で、背景に描く */
+.m-progress-bars__bar {
+  position: relative;
+  flex: 1;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: linear-gradient(light-dark(#d6d4cc, #3a3942), light-dark(#d6d4cc, #3a3942)) center / 100% 3px no-repeat;
+  cursor: pointer;
+}
+
+/* ::before は見終えた分（スクロールに合わせて満ちる）、::after は今の1枚の残り時間（時間で満ちる） */
+.m-progress-bars__bar::before,
+.m-progress-bars__bar::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 1.5px);
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: light-dark(#4357d1, #95a3ff);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.m-progress-bars__bar:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 0;
+  border-radius: 4px;
+}
+
+/* 止める・動かすの切り替え。押している間は「止めている」状態 */
+.m-progress-bars__pause {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: light-dark(#5f5d68, #a6a4b0);
+  cursor: pointer;
+}
+
+.m-progress-bars__pause::before {
+  content: "";
+  box-sizing: border-box;
+  width: 8px;
+  height: 10px;
+  border-inline: 3px solid currentColor;
+}
+
+.m-progress-bars__pause[aria-pressed="true"]::before {
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.m-progress-bars__pause:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
+}

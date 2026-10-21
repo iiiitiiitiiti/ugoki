@@ -1,0 +1,117 @@
+.m-stretch-dots {
+  /* script.js もこの2つを読んで、点を押したときの送りに同じ速さと緩急を使う */
+  --duration: 500ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-stretch-dots__track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 12px;
+}
+
+.m-stretch-dots__track::-webkit-scrollbar {
+  display: none;
+}
+
+.m-stretch-dots__track:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 2px;
+}
+
+/* ボタンで送る間だけ、1枚ずつ止まる働きを外す（途中の位置を通れるように） */
+.m-stretch-dots.is-moving .m-stretch-dots__track {
+  scroll-snap-type: none;
+}
+
+.m-stretch-dots__slide {
+  flex: 0 0 100%;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  box-sizing: border-box;
+  height: 140px;
+  padding: 20px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: light-dark(#e3e7fb, #272c4d);
+}
+
+.m-stretch-dots__slide:nth-child(2) {
+  background: light-dark(#fbe4d8, #48291f);
+}
+
+.m-stretch-dots__slide:nth-child(3) {
+  background: light-dark(#dcefe2, #1f3d2b);
+}
+
+.m-stretch-dots__slide:nth-child(4) {
+  background: light-dark(#f5edcc, #403a1a);
+}
+
+.m-stretch-dots__label {
+  margin: 0;
+  color: light-dark(#5f5d68, #a6a4b0);
+  font-size: 12px;
+}
+
+.m-stretch-dots__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.m-stretch-dots__dots {
+  display: flex;
+  width: max-content;
+  margin: 12px auto 0;
+}
+
+/* 押せる範囲は24px。今の点より後ろの点は、伸びた分だけ右へずれる */
+.m-stretch-dots__dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.m-stretch-dots__dot[aria-current="true"] ~ .m-stretch-dots__dot {
+  transform: translateX(16px);
+}
+
+/* 点は最初から伸びた長さで描き、右側を切り抜いて丸に見せる。幅を動かさずに伸び縮みできる */
+.m-stretch-dots__dot::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 24px;
+  height: 8px;
+  border-radius: 4px;
+  background: light-dark(#4357d1, #95a3ff);
+  opacity: 0.3;
+  clip-path: inset(0 16px 0 0 round 4px);
+}
+
+.m-stretch-dots__dot[aria-current="true"]::before {
+  opacity: 1;
+  clip-path: inset(0 0 0 0 round 4px);
+}
+
+.m-stretch-dots__dot:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 0;
+  border-radius: 4px;
+}

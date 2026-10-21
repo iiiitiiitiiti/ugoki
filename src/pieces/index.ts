@@ -13,6 +13,7 @@ export const categories: { id: Category; label: string }[] = [
   { id: 'hover', label: 'ホバー' },
   { id: 'scroll', label: 'スクロール' },
   { id: 'transition', label: '画面切り替え' },
+  { id: 'carousel', label: 'カルーセル' },
 ];
 
 export const categoryLabel = (id: Category) => categories.find((c) => c.id === id)?.label ?? id;

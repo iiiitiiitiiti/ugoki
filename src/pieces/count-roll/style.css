@@ -1,0 +1,150 @@
+.m-count-roll {
+  /* script.js もこの2つを読んで、矢印を押したときの送りに同じ速さと緩急を使う */
+  --duration: 500ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  color: light-dark(#1d1c22, #ecebf2);
+}
+
+.m-count-roll__track {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 12px;
+}
+
+.m-count-roll__track::-webkit-scrollbar {
+  display: none;
+}
+
+.m-count-roll__track:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 2px;
+}
+
+/* ボタンで送る間だけ、1枚ずつ止まる働きを外す（途中の位置を通れるように） */
+.m-count-roll.is-moving .m-count-roll__track {
+  scroll-snap-type: none;
+}
+
+.m-count-roll__slide {
+  flex: 0 0 100%;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  box-sizing: border-box;
+  height: 140px;
+  padding: 20px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: light-dark(#e3e7fb, #272c4d);
+}
+
+.m-count-roll__slide:nth-child(2) {
+  background: light-dark(#fbe4d8, #48291f);
+}
+
+.m-count-roll__slide:nth-child(3) {
+  background: light-dark(#dcefe2, #1f3d2b);
+}
+
+.m-count-roll__slide:nth-child(4) {
+  background: light-dark(#f5edcc, #403a1a);
+}
+
+.m-count-roll__label {
+  margin: 0;
+  color: light-dark(#5f5d68, #a6a4b0);
+  font-size: 12px;
+}
+
+.m-count-roll__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.m-count-roll__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.m-count-roll__prev,
+.m-count-roll__next {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: light-dark(#1d1c22, #ecebf2);
+  cursor: pointer;
+  transition: opacity var(--duration) var(--ease);
+}
+
+.m-count-roll__prev::before,
+.m-count-roll__next::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  transform: translateX(2px) rotate(-45deg);
+}
+
+.m-count-roll__next::before {
+  transform: translateX(-2px) rotate(135deg);
+}
+
+/* 端では押しても動かない。disabled にするとフォーカスが外れるため、見た目だけ薄くする */
+.m-count-roll__prev[aria-disabled="true"],
+.m-count-roll__next[aria-disabled="true"] {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.m-count-roll__prev:focus-visible,
+.m-count-roll__next:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: -2px;
+}
+
+.m-count-roll__counter {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+
+.m-count-roll__window {
+  overflow: hidden;
+  height: 1.5em;
+  font-weight: 700;
+}
+
+.m-count-roll__digits {
+  display: block;
+}
+
+.m-count-roll__digit {
+  display: block;
+  height: 1.5em;
+  text-align: center;
+}
+
+.m-count-roll__total {
+  color: light-dark(#5f5d68, #a6a4b0);
+}
