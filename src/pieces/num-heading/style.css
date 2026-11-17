@@ -1,0 +1,24 @@
+/* 番号は手順の順番を伝えるので、英字の飾りと違って読み上げに残す */
+.m-num-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: light-dark(#1d1c22, #ecebf2);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.m-num-heading__num {
+  color: light-dark(#4357d1, #95a3ff);
+  font-size: 40px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.m-num-heading__text {
+  padding: 6px 0 6px 14px;
+  border-left: 1px solid light-dark(#d6d4cc, #3a3942);
+  font-size: 18px;
+  line-height: 1.4;
+}

@@ -1,0 +1,66 @@
+/* 「重要」は aside の名前で読み上げに伝わるので、ラベルは HTML 側で aria-hidden にしている */
+.m-alert-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  border: 1px solid light-dark(#f0c8a0, #6b4a2e);
+  border-radius: 8px;
+  background: light-dark(#fff4e8, #33271d);
+  color: light-dark(#1d1c22, #ecebf2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.m-alert-bar__label {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: light-dark(#b3261e, #ffb4a8);
+  color: light-dark(#ffffff, #410e0b);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.m-alert-bar__link {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 行き先があることを右端の「＞」で示す。文字で書くと読み上げで読まれる */
+.m-alert-bar__link::after {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-right: 3px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  rotate: 45deg;
+}
+
+/* 色は時間をかけずに切り替える。この分類の部品は動きを付けない */
+@media (hover: hover) {
+  .m-alert-bar__link:hover {
+    color: light-dark(#b3261e, #ffb4a8);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.m-alert-bar__link:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 4px;
+  color: light-dark(#b3261e, #ffb4a8);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

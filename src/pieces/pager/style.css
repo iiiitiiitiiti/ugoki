@@ -1,0 +1,113 @@
+.m-pager {
+  container-type: inline-size;
+  width: 100%;
+  color: light-dark(#1d1c22, #ecebf2);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.m-pager__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.m-pager__num,
+.m-pager__step {
+  display: grid;
+  place-items: center;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.m-pager__num {
+  padding: 0 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.m-pager__num.is-current {
+  background: light-dark(#4357d1, #95a3ff);
+  color: light-dark(#ffffff, #14152b);
+  font-weight: 700;
+}
+
+.m-pager__gap {
+  width: 20px;
+  color: light-dark(#5f5d68, #a6a4b0);
+  text-align: center;
+}
+
+.m-pager__step {
+  position: relative;
+  grid-auto-flow: column;
+  gap: 6px;
+  border: 1px solid light-dark(#d6d4cc, #3a3942);
+}
+
+/* 向きの「＜」「＞」は CSS で描く。文字で書くと読み上げで読まれる */
+.m-pager__step::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+
+.m-pager__step--prev::before {
+  rotate: -135deg;
+  margin-left: 3px;
+}
+
+.m-pager__step--next::before {
+  order: 1;
+  rotate: 45deg;
+  margin-right: 3px;
+}
+
+/* 狭い幅では「前へ」「次へ」を見た目から外し、読み上げにだけ残す */
+.m-pager__step-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@container (min-width: 420px) {
+  .m-pager__step {
+    padding: 0 12px;
+  }
+
+  .m-pager__step-text {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+}
+
+/* 色は時間をかけずに切り替える。この分類の部品は動きを付けない */
+@media (hover: hover) {
+  a.m-pager__num:hover,
+  .m-pager__step:hover {
+    background: light-dark(#eef0fc, #2c2f4a);
+    color: light-dark(#4357d1, #95a3ff);
+  }
+}
+
+a.m-pager__num:focus-visible,
+.m-pager__step:focus-visible {
+  outline: 2px solid light-dark(#4357d1, #95a3ff);
+  outline-offset: 2px;
+  background: light-dark(#eef0fc, #2c2f4a);
+  color: light-dark(#4357d1, #95a3ff);
+}
