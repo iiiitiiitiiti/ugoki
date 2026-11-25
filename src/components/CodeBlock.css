@@ -1,16 +1,21 @@
+/* はみ出しは clip で切る。hidden だとスクロール領域になり、中のバーがページに追従しなくなる */
 .m-code {
-  overflow: hidden;
+  overflow: clip;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-code-bg);
 }
 
+/* 長いコードを読み進めても、ファイルの切り替えとコピーに手が届くよう上端に残す */
 .m-code__bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 8px 8px 0;
+  gap: var(--space-12);
+  padding: var(--space-8) var(--space-8) 0;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface);
 }
@@ -21,7 +26,7 @@
 
 .m-code__tab {
   min-height: 40px;
-  padding: 0 16px;
+  padding: 0 var(--space-16);
   border: 0;
   border-bottom: 2px solid transparent;
   background: none;
@@ -38,9 +43,9 @@
 }
 
 .m-code__copy {
-  min-height: 36px;
-  margin-bottom: 6px;
-  padding: 0 16px;
+  min-height: 40px;
+  margin-bottom: var(--space-8);
+  padding: 0 var(--space-16);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   background: var(--color-bg);
@@ -58,11 +63,16 @@
 
 .m-code__panel pre {
   margin: 0;
-  padding: 20px;
-  font-family: var(--font-code);
+  padding: var(--space-24);
   font-size: 13px;
   line-height: 1.7;
   tab-size: 2;
+}
+
+/* code にも書体を指定する。pre だけだと、中の code はブラウザ既定の等幅（Windows では MS ゴシック）になる */
+.m-code__panel pre,
+.m-code__panel code {
+  font-family: var(--font-code);
 }
 
 /* 色付けはライトが既定。ダークのときは Shiki が用意した暗い配色に差し替える */

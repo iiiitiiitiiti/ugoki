@@ -38,7 +38,9 @@
   transform-origin: left;
 }
 
+/* 語の切れ目で折り返し、行末に1文字だけ残さない */
 .m-underline-text {
   margin: 0;
   line-height: 1.8;
+  word-break: auto-phrase;
 }

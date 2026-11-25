@@ -1,11 +1,11 @@
 .m-theme-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-8);
   min-height: 40px;
-  padding: 0 14px;
+  padding: 0 var(--space-16);
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--color-bg);
   color: var(--color-text);
   font: inherit;

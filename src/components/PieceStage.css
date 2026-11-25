@@ -5,7 +5,7 @@
   place-items: center;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  padding: 24px;
+  padding: var(--stage-padding, 24px);
   border-radius: var(--radius);
   background-color: var(--color-stage);
   background-image: radial-gradient(var(--color-stage-dot) 1px, transparent 1px);
@@ -19,7 +19,14 @@
 }
 
 .m-stage--detail {
-  padding: 40px;
+  --stage-padding: 40px;
+}
+
+/* 詳細ページでコードと横に並ぶ幅では、枠が狭くなる分だけ余白を詰めて中身の幅を保つ */
+@media (min-width: 1200px) {
+  .m-stage--detail {
+    --stage-padding: 24px;
+  }
 }
 
 /* スクロールの作品は、枠そのものをスクロール領域にする。動きは一番近いスクロール領域に連動する */

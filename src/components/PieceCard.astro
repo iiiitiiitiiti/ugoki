@@ -9,14 +9,21 @@ interface Props {
 
 const { piece } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const files = piece.script ? 'HTML・CSS・JS' : 'HTML・CSS';
 ---
 
-<article class="m-piece-card">
+<article class="m-piece-card" id={`piece-${piece.slug}`}>
   <PieceStage piece={piece} size="card" />
   <div class="m-piece-card__body">
-    <h3 class="m-piece-card__title">
-      <a class="m-piece-card__link" href={`${base}/pieces/${piece.slug}/`}>{piece.title}</a>
-    </h3>
-    <p class="m-piece-card__summary">{piece.summary}</p>
+    <div class="m-piece-card__head">
+      <h3 class="m-piece-card__title">
+        <a class="m-piece-card__link" href={`${base}/pieces/${piece.slug}/`}>{piece.title}</a>
+      </h3>
+      <p class="m-piece-card__files">
+        <span class="u-visually-hidden">使うファイル</span>
+        {files}
+      </p>
+    </div>
+    <p class="m-piece-card__summary u-phrase">{piece.summary}</p>
   </div>
 </article>

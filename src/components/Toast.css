@@ -1,10 +1,10 @@
 .m-toast {
   position: fixed;
   left: 50%;
-  bottom: 24px;
+  bottom: var(--space-24);
   z-index: 10;
-  padding: 10px 20px;
-  border-radius: 999px;
+  padding: var(--space-12) var(--space-24);
+  border-radius: var(--radius-pill);
   background: var(--color-text);
   color: var(--color-bg);
   font-size: 14px;
